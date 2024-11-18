@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processed Data</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto my-10 p-5 max-w-lg bg-white rounded-lg shadow-md">
+        <h1 class="text-3xl font-semibold text-center text-gray-800 mb-5">Processed Data</h1>
+        <p class="text-lg text-gray-700 mb-5">Your files have been processed successfully!</p>
+        
+        <div class="space-y-4">
+            <a href="/download/{{ file_path }}" class="block py-2 bg-green-500 text-white rounded-md text-center hover:bg-green-600 transition duration-300">Download Processed Data</a>
+            <a href="/user_data" class="block py-2 bg-blue-500 text-white rounded-md text-center hover:bg-blue-600 transition duration-300">View User Data</a>
+        </div>
+    </div>
+</body>
+</html>

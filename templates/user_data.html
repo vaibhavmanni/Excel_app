@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto my-10 p-5 max-w-4xl bg-white rounded-lg shadow-md">
+        <h1 class="text-3xl font-semibold text-center text-gray-800 mb-5">User Data</h1>
+        <p class="text-xl text-gray-700 mb-5">Total Sales: <span class="font-bold text-gray-900">{{ total_sales }}</span></p>
+        
+        <h2 class="text-2xl font-semibold text-gray-800 mb-3">Product-wise Sales</h2>
+        <ul class="list-none space-y-2 mb-5">
+            {% for product, sales in product_sales.items() %}
+                <li class="text-lg text-gray-800">{{ product }}: <span class="font-semibold">{{ sales }}</span></li>
+            {% endfor %}
+        </ul>
+        
+        <h2 class="text-2xl font-semibold text-gray-800 mb-3">Sales Chart</h2>
+        <canvas id="salesChart" width="400" height="200" class="mx-auto"></canvas>
+    </div>
+
+    <script>
+        
+        const productSales = {{ product_sales | tojson }};
+        
+        const labels = Object.keys(productSales); //  (labels)
+        const data = Object.values(productSales); //  (data)
+        
+        // Create the bar chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels, 
+                datasets: [{
+                    label: 'Sales',
+                    data: data, 
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
